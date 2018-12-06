@@ -24,6 +24,8 @@ public class MainActivity extends AppCompatActivity {
     TextView timerTextView;
     Button playAgainButton;
     RelativeLayout gameRelativeLayout;
+    TextView finalScoreTextView;
+    RelativeLayout againRelativeLayout;
 
     ArrayList<Integer> answers = new ArrayList<Integer>();
     int locationOfCorrectAnswer;
@@ -34,10 +36,11 @@ public class MainActivity extends AppCompatActivity {
         score = 0;
         numberOfQuestions = 0;
 
+        gameRelativeLayout.setVisibility(View.VISIBLE);
         timerTextView.setText("30s");
         pointsTextView.setText("0/0");
         resultTextView.setText("");
-        playAgainButton.setVisibility(View.INVISIBLE);
+        againRelativeLayout.setVisibility(View.INVISIBLE);
 
         generateQuestion();
 
@@ -50,9 +53,10 @@ public class MainActivity extends AppCompatActivity {
 
             @Override
             public void onFinish() {
-                playAgainButton.setVisibility(View.VISIBLE);
+                gameRelativeLayout.setVisibility(View.INVISIBLE);
+                againRelativeLayout.setVisibility(View.VISIBLE);
                 timerTextView.setText("0s");
-                resultTextView.setText("Your score: " + Integer.toString(score) + "/" + Integer.toString(numberOfQuestions));
+                finalScoreTextView.setText("Final score: " + Integer.toString(score) + "/" + Integer.toString(numberOfQuestions));
 
             }
         }.start();
@@ -112,6 +116,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         startButton = (Button) findViewById(R.id.startButton);
+
         sumTextView = (TextView) findViewById(R.id.sumTextView);
 
         button0 = (Button) findViewById(R.id.button0);
@@ -123,8 +128,10 @@ public class MainActivity extends AppCompatActivity {
         pointsTextView = (TextView) findViewById(R.id.pointsTextView);
         timerTextView = (TextView) findViewById(R.id.timerTextView);
 
-        playAgainButton = (Button) findViewById(R.id.playAgainButton);
-
         gameRelativeLayout = (RelativeLayout) findViewById(R.id.gameRelativeLayout);
+
+        playAgainButton = (Button) findViewById(R.id.playAgainButton);
+        finalScoreTextView = (TextView) findViewById(R.id.finalScoreTextView);
+        againRelativeLayout = (RelativeLayout) findViewById(R.id.againRelativeLayout);
     }
 }
